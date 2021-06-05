@@ -1,0 +1,8 @@
+name: flaggart
+
+channels: 
+  - default
+  - conda-forge
+
+dependancies:
+  - python=3.9
