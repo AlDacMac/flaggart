@@ -1,5 +1,9 @@
-from flaggart.wiki_flags import selectpage
+from flaggart.wiki_flags import selectflagpage
+from flaggart.wiki_flags import getpage
 import pytest
 
 def test_selectpage_basic():
-    assert selectpage("Scotland", ['Flag of Scotland']) == 'Flag of Scotland'
+    assert selectflagpage("Scotland", ['Flag of Scotland']) == 'Flag of Scotland'
+
+def test_selectpage_altname():
+    assert selectflagpage("Britain", ["Union Jack", "Flag of Britain"]) == "Flag of Britain"
