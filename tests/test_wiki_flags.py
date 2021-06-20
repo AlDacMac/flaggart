@@ -3,7 +3,7 @@ from flaggart.wiki_flags import getpage
 import pytest
 
 def test_getpage_basic():
-    assert getpage("Scotland").title == "Flag of Scotland"
+    assert getpage("Scotland") == "Flag of Scotland"
 
 def test_selectpage_basic():
     assert selectflagpage("Scotland", ['Flag of Scotland']) == 'Flag of Scotland'
