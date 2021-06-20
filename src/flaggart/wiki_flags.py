@@ -1,7 +1,8 @@
 import wikipedia
 
 #Special behaviour for when a disambiguation style page comes up maybe?
-def getpage(place):
+# - I can confirm this via categories
+def getpagename(place):
     search_results = wikipedia.search(f"Flag of {place}")
     return selectflagpage(place, search_results)
 
