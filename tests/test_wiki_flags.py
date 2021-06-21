@@ -1,8 +1,8 @@
 from flaggart.wiki_flags import *
 import pytest
 
-def test_getpage_basic():
-    assert getpage("Scotland") == "Flag of Scotland"
+def test_getpagename_basic():
+    assert getpagename("Scotland") == "Flag of Scotland"
 
 def test_selectpage_basic():
     assert selectflagpage("Scotland", ['Flag of Scotland']) == 'Flag of Scotland'
