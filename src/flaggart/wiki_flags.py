@@ -1,4 +1,5 @@
 import wikipedia
+import wptools
 
 #Special behaviour for when a disambiguation style page comes up maybe?
 # - I can confirm this via categories
@@ -17,3 +18,8 @@ def selectflagpage(place, results):
     for result in results:
         if result[0:] == "Coat of arms":
             return result
+
+def getflagurl(pagename):
+    page = wptools.page(pagename)
+    page.get()
+    return page.images(['url'])[0]['url']
