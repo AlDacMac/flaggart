@@ -1,5 +1,4 @@
-from flaggart.wiki_flags import selectflagpage
-from flaggart.wiki_flags import getpage
+from flaggart.wiki_flags import *
 import pytest
 
 def test_getpage_basic():
