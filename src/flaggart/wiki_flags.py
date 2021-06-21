@@ -21,5 +21,5 @@ def selectflagpage(place, results):
 
 def getflagurl(pagename):
     page = wptools.page(pagename)
-    page.get()
-    return page.images(['url'])[0]['url']
+    page.get_restbase('/page/summary/')
+    return page.data['image'][0]['url']
