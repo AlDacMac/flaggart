@@ -16,7 +16,7 @@ def selectflagpage(place, results):
         elif result[0:7] == "Flags of":
             return result
     for result in results:
-        if result[0:] == "Coat of arms":
+        if result[0:12] == "Coat of Arms":
             return result
 
 def getflagurl(pagename):
