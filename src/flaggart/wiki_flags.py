@@ -9,7 +9,7 @@ def getpagename(place):
 
 def selectflagpage(place, results):
     for result in results:
-        if "flag of" in result.lower():
+        if "flag of" in result.lower() or "flags of" in result.lower():
             return result
     for result in results:
         if "coat of arms" in result.lower():
