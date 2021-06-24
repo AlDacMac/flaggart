@@ -3,24 +3,37 @@ import pytest
 
 ########################################################################################################################################################################
 # Unit Tests
-#########################################################################################################################################################################
+########################################################################################################################################################################
 
 def test_getpagename_basic():
     assert getpagename("Scotland") == "Flag of Scotland"
 
+#VERY IMPORTANT
 def test_getpagename_basic2():
     assert getpagename("Provo") == "Flag of Provo, Utah"
 
-def test_selectpage_basic():
+def test_getpagename_altname():
+    assert getpagename("Britain") == "Flag of the United Kingdom"
+
+def test_getpagename_flagsof():
+    assert getpagename("Mughal Empire") == "Flags of the Mughal Empire"
+
+def test_getpagename_disambig():
+    assert getpagename("New York City") == "Flags of New York City"
+
+def test_getpagename_disambig2():
+    assert getpagename("New York State") == "Coat of arms of New York"
+
+def test_selectflagpage_basic():
     assert selectflagpage("Scotland", ['Flag of Scotland']) == 'Flag of Scotland'
 
-def test_selectpage_altname():
+def test_selectflagpage_altname():
     assert selectflagpage("Britain", ["Union Jack", "Flag of Britain"]) == "Flag of Britain"
 
-def test_selectpagename_coatarms():
+def test_selectflagpage_coatarms():
     assert selectflagpage("Portugal", ["Coat of Arms of Portugal"]) == "Coat of Arms of Portugal"
 
-def test_selectpage_royalcoat():
+def test_selectflagpage_royalcoat():
     assert selectflagpage("United Kingdom", ["Royal coat of arms of the United Kingdom"]) == "Royal coat of arms of the United Kingdom"
 
 def test_getflagurl_basicscotland():
