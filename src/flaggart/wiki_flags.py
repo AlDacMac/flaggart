@@ -9,14 +9,10 @@ def getpagename(place):
 
 def selectflagpage(place, results):
     for result in results:
-        if result[0:7] == "Flag of":
-            return result
-        elif result[-4:] == "Flag":
-            return result
-        elif result[0:7] == "Flags of":
+        if "flag of" in result.lower():
             return result
     for result in results:
-        if result[0:12] == "Coat of Arms":
+        if "coat of arms" in result.lower():
             return result
 
 def getflagurl(pagename):
