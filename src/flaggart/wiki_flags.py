@@ -19,3 +19,8 @@ def getflagurl(pagename):
     page = wptools.page(pagename)
     page.get_restbase('/page/summary/')
     return page.data['image'][0]['url']
+# Makes a url to a wikipedia page based on plaintext pagename
+def constructpageurl(pagename):
+    pagenamehyphen = pagename.replace(' ', '_')
+    url = "https://en.wikipedia.org/wiki/" + pagenamehyphen
+    return url

@@ -41,3 +41,11 @@ def test_getflagurl_basicscotland():
 
 def test_getflagurl_provo():
     assert getflagurl("Flag of Provo, Utah") == 'https://upload.wikimedia.org/wikipedia/en/2/23/Flag_of_Provo%2C_Utah_%282015%29.png'
+
+# constructpageurl
+
+def test_constructurl_oneword():
+    assert constructpageurl("test") == "https://en.wikipedia.org/wiki/test"
+
+def test_constructurl_morewords():
+    assert constructpageurl("test and again") == "https://en.wikipedia.org/wiki/test_and_again"
