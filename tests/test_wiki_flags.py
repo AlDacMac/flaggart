@@ -70,3 +70,11 @@ def test_getredirect_ny():
 
 def test_getredirect_realname():
     assert getredirect("Coat of arms of New York") == "Coat of arms of New York"
+
+#isdisambiguation
+
+def test_isdisambiguation_true():
+    assert isdisambiguation("Flag of New York") == True
+
+def test_isdisambiguation_false():
+    assert isdisambiguation("Union Jack") == False

@@ -43,3 +43,13 @@ def getredirect(pagename):
         return data['query']['redirects'][0]['to']
     else:
         return pagename
+
+def isdisambiguation(pagename):
+    pagenamehyphen = pagename.replace(' ', '_')
+    query = requests.get(f'https://en.wikipedia.org/w/api.php?action=query&format=json&titles={pagenamehyphen}&prop=categories')
+    data = json.loads(query.text)
+    for category in data['query']['pages'][next(iter(data['query']['pages'].keys()))]['categories']:
+        catname = category['title']
+        if catname == "Category:All disambiguation pages":
+            return True
+    return False
