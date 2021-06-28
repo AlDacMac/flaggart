@@ -36,6 +36,8 @@ def test_selectflagpage_coatarms():
 def test_selectflagpage_royalcoat():
     assert selectflagpage("United Kingdom", ["Royal coat of arms of the United Kingdom"]) == "Royal coat of arms of the United Kingdom"
 
+# getflagurl
+
 def test_getflagurl_basicscotland():
     assert getflagurl('Flag of Scotland') == "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Flag_of_Scotland.svg/1000px-Flag_of_Scotland.svg.png"
 
@@ -60,3 +62,11 @@ def test_pageexists_altname():
 
 def test_pageexists_notexists():
     assert pageexists("not a real wikipedia page") == False
+
+# getrerdirect
+
+def test_getredirect_ny():
+    assert getredirect("Flag of New York State") == "Coat of arms of New York"
+
+def test_getredirect_realname():
+    assert getredirect("Coat of arms of New York") == "Coat of arms of New York"

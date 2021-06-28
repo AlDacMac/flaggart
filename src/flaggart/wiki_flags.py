@@ -34,3 +34,12 @@ def constructpageurl(pagename):
     pagenamehyphen = pagename.replace(' ', '_')
     url = "https://en.wikipedia.org/wiki/" + pagenamehyphen
     return url
+
+def getredirect(pagename):
+    pagenamehyphen = pagename.replace(' ', '_')
+    query = requests.get(r'https://en.wikipedia.org/w/api.php?action=query&titles={}&&redirects&format=json'.format(pagenamehyphen))
+    data = json.loads(query.text)
+    if 'redirects' in data['query']:
+        return data['query']['redirects'][0]['to']
+    else:
+        return pagename
