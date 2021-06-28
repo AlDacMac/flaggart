@@ -78,3 +78,13 @@ def test_isdisambiguation_true():
 
 def test_isdisambiguation_false():
     assert isdisambiguation("Union Jack") == False
+
+#getdisambiguationlinks
+
+def test_getdisambiguationlinks_newyork():
+    assert getdisambiguationlinks('Flag of New York') == ['Coat of arms of New York', "Flags of New York City"]
+
+def test_getdisambiguationlinks_train():
+    links = getdisambiguationlinks('4 Train')
+    for page in ['4 (New York City Subway service)', 'Line 4 Yellow (Montreal Metro)', 'Paris Métro Line 4', 'Line 4, Beijing Subway', 'Line 4, Shanghai Metro']:
+        assert getredirect(page) in links

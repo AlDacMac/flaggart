@@ -53,3 +53,13 @@ def isdisambiguation(pagename):
         if catname == "Category:All disambiguation pages":
             return True
     return False
+
+def getdisambiguationlinks(pagename):
+    links = []
+    pagenamehyphen = pagename.replace(' ', '_')
+    query = requests.get(f'https://en.wikipedia.org/w/api.php?action=query&format=json&titles={pagenamehyphen}&prop=links')
+    data = json.loads(query.text)
+    for link in data['query']['pages'][next(iter(data['query']['pages'].keys()))]['links']:
+        if not link['title'] in [f'Talk:{pagename}', 'Help:Disambiguation']:
+            links.append(getredirect(link['title']))
+    return links
