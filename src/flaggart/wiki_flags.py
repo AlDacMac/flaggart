@@ -19,6 +19,16 @@ def getflagurl(pagename):
     page = wptools.page(pagename)
     page.get_restbase('/page/summary/')
     return page.data['image'][0]['url']
+
+#Checks if a wikipedia page exists
+#   Note: case sensitive
+def pageexists(pagename):
+    url = constructpageurl(pagename)
+    if requests.get(url).status_code == 200:
+        return True
+    else: 
+        return False
+
 # Makes a url to a wikipedia page based on plaintext pagename
 def constructpageurl(pagename):
     pagenamehyphen = pagename.replace(' ', '_')

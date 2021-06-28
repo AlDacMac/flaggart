@@ -49,3 +49,14 @@ def test_constructurl_oneword():
 
 def test_constructurl_morewords():
     assert constructpageurl("test and again") == "https://en.wikipedia.org/wiki/test_and_again"
+
+# pageexists
+
+def test_pageexists_exists():
+    assert pageexists("Wikipedia") == True
+
+def test_pageexists_altname():
+    assert pageexists("Flag of United Kingdom")
+
+def test_pageexists_notexists():
+    assert pageexists("not a real wikipedia page") == False
