@@ -88,3 +88,20 @@ def test_getdisambiguationlinks_train():
     links = getdisambiguationlinks('4 Train')
     for page in ['4 (New York City Subway service)', 'Line 4 Yellow (Montreal Metro)', 'Paris Métro Line 4', 'Line 4, Beijing Subway', 'Line 4, Shanghai Metro']:
         assert getredirect(page) in links
+
+#filterresults
+
+def test_filterresults_simple():
+    assert filterresults(["flag of belgium"]) == ['flag of belgium']
+
+def test_filterresults_none():
+    assert filterresults(["notrelevant"]) == []
+
+def test_filterresults_diffcase():
+    assert filterresults(["Flag of Scotland"]) == ['Flag of Scotland']
+
+def test_filterresults_flags():
+    assert filterresults(["Flags of New York"]) == ['Flags of New York']
+
+def test_filterresults_arms():
+    assert filterresults(["Coat of arms of New York"]) == ['Coat of arms of New York'] 
