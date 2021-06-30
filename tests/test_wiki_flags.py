@@ -105,3 +105,6 @@ def test_filterresults_flags():
 
 def test_filterresults_arms():
     assert filterresults(["Coat of arms of New York"]) == ['Coat of arms of New York'] 
+
+def test_filterresults_flagatend():
+    assert filterresults(["Rainbow Flag (LGBT)"]) == ["Rainbow Flag (LGBT)"]

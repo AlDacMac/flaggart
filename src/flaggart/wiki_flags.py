@@ -16,7 +16,7 @@ def selectflagpage(place, results):
             return result
 
 def filterresults(searchresults):
-    return [x for x in searchresults if re.search('flags? of|coat of arms', x, re.IGNORECASE)]
+    return [x for x in searchresults if re.search('flag|coat of arms', x, re.IGNORECASE)]
 
 def getflagurl(pagename):
     page = wptools.page(pagename)
