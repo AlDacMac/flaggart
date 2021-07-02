@@ -1,5 +1,8 @@
 import wikipedia
 import wptools
+import requests
+import json
+import re
 
 #Special behaviour for when a disambiguation style page comes up maybe?
 # - I can confirm this via categories
