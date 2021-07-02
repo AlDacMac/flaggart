@@ -4,11 +4,25 @@ import requests
 import json
 import re
 
-#Special behaviour for when a disambiguation style page comes up maybe?
-# - I can confirm this via categories
-def getpagename(place):
-    search_results = wikipedia.search(f"Flag of {place}")
-    return selectflagpage(place, search_results)
+
+# Returns the wikipedia page corresponding to the flag (or similar) of a place
+#   Special behaviour for when a disambiguation style page comes up maybe?
+#   - I can confirm this via categories
+def getflagpage(place):
+    result = None
+    searchresults = filterresults(wikipedia.search(f"Flag of {place}"))
+    if pageexists(f"Flag of {place}"):
+        #TODO Bloody redirects w()
+        result = getredirect(f"Flag of {place}")
+        altresults = searchresults
+    else:
+        result = selectflagpage(place, searchresults)
+        altresults = searchresults
+        return [result, altresults]
+    if isdisambiguation(result):
+        altresults = getdisambiguationlinks(result)
+        result = altresults[0]
+    return [result, altresults]
 
 def selectflagpage(place, results):
     for result in results:

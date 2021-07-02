@@ -5,24 +5,55 @@ import pytest
 # Unit Tests
 ########################################################################################################################################################################
 
-def test_getpagename_basic():
-    assert getpagename("Scotland") == "Flag of Scotland"
+# getflagpage
+
+def test_getflagpage_basic():
+    assert getflagpage("Scotland")[0] == "Flag of Scotland"
 
 #VERY IMPORTANT
-def test_getpagename_basic2():
-    assert getpagename("Provo") == "Flag of Provo, Utah"
+def test_getflagpage_basic2():
+    assert getflagpage("Provo")[0] == "Flag of Provo, Utah"
 
-def test_getpagename_altname():
-    assert getpagename("Britain") == "Flag of the United Kingdom"
+def test_getflagpage_altname():
+    assert getflagpage("Britain")[0] == "Union Jack"
 
-def test_getpagename_flagsof():
-    assert getpagename("Mughal Empire") == "Flags of the Mughal Empire"
+def test_getflagpage_flagsof():
+    assert getflagpage("Mughal Empire")[0] == "Flags of the Mughal Empire"
 
-def test_getpagename_disambig():
-    assert getpagename("New York City") == "Flags of New York City"
+def test_getflagpage_disambig_nypure():
+    result = getflagpage("New York")
+    assert result[0] == "Coat of arms of New York"
+    for page in  ["Coat of arms of New York", "Flags of New York City"]:
+        assert page in result[1]
 
-def test_getpagename_disambig2():
-    assert getpagename("New York State") == "Coat of arms of New York"
+def test_getflagpage_disambig_nycity():
+    assert getflagpage("New York City")[0] == "Flags of New York City"
+ 
+def test_getflagpage_disambig_nystate():
+    assert getflagpage("New York State")[0] == "Coat of arms of New York"
+
+    # For some reason running this with pytest ocassionally gives a result where the rainbow flag and 
+    #   bi flag pages are swapped. Don't worry about it.
+def test_getflagpage_search_lgbt():
+    result = getflagpage('gay')[0]
+    assert result[0] == 'Rainbow flag (LGBT)' 
+    for page in ['Rainbow flag (LGBT)', 'Bear flag (gay culture)', 'Gay pride flag of South Africa', 'Bisexual pride flag', 'Rainbow flag', 'Pansexual pride flag', 'Pride flag', 'Lesbian flag']:
+        assert page in result[1]
+
+def test_getflagpage_ispage_includesearch():
+    result = getflagpage('Britain')[1]
+    for page in ['Flag of the United Kingdom', 'Flag of Great Britain', 'List of United Kingdom flags', 'Historical flags of the British Empire and the overseas territories', 
+    'Flag of British Columbia', 'Star of India (flag)', 'Flag of Sri Lanka', 'Flag of Malaysia', 'Flag of the United States']:
+        assert page in result
+
+def test_getflagpage_ispage_coatofarms():
+    result = getflagpage('British coat of arms')
+    assert result[0] == "Royal coat of arms of the United Kingdom"
+    for page in ['Royal coat of arms of the United Kingdom', 'Arms of Canada', 'National coat of arms', 'Flag and coat of arms of Corsica', 
+    'Coat of arms', 'Coat of arms of Malaysia', 'Coat of arms of Zimbabwe', 'Coat of arms of British Columbia', 'Royal arms of England', 'Coat of arms of Australia']:
+        assert page in result[1]
+
+# selectflagpage
 
 def test_selectflagpage_basic():
     assert selectflagpage("Scotland", ['Flag of Scotland']) == 'Flag of Scotland'
