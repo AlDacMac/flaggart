@@ -14,7 +14,7 @@ authors = ["AlDacMac <alasdairmacgdev@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3"
 wikipedia = "^1.4.0"
 wptools = "^0.4.17"
 
