@@ -1,7 +1,7 @@
 [project]
 name = "flaggart"
 version = "0.1.0"
-description = "Retrieves place flags and performs useful operations on them"
+description = "Package for retrieving, creating, and performing operations on flags"
 authors = ["AlDacMac <alasdairmacgdev@gmail.com>"]
 license = "MIT"
 readme = "./README.md"
@@ -9,7 +9,7 @@ readme = "./README.md"
 [tool.poetry]
 name = "flaggart"
 version = "0.1.0"
-description = "Retrieves place flags and performs useful operations on them"
+description = "Package for retrieving, creating, and performing operations on flags"
 authors = ["AlDacMac <alasdairmacgdev@gmail.com>"]
 license = "MIT"
 
