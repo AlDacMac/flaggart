@@ -12,6 +12,7 @@ Welcome to flaggart's documentation!
 
    usage/installation
    usage/quickstart
+   wiki_flags
 
 
 Indices and tables
