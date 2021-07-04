@@ -5,18 +5,25 @@ import json
 import re
 
 
-# Returns the wikipedia page corresponding to the flag (or similar) of a place
-#   Special behaviour for when a disambiguation style page comes up maybe?
-#   - I can confirm this via categories
-def getflagpage(place):
+def getflagpage(term):
+    """Returns the wikipedia page corresponding to the flag associated with the search term, along 
+    with a list of alternatives. 
+
+    :param term: A place, person, organisation, etc.
+    :type term: String
+    
+    :return: A list containing the title of the wikipedia page corresponding to the suggested flag,
+        and a list of titles for suggested alternative pages
+    :rtype: [String, [String]]
+    """
     result = None
-    searchresults = filterresults(wikipedia.search(f"Flag of {place}"))
-    if pageexists(f"Flag of {place}"):
+    searchresults = filterresults(wikipedia.search(f"Flag of {term}"))
+    if pageexists(f"Flag of {term}"):
         #TODO Bloody redirects w()
-        result = getredirect(f"Flag of {place}")
+        result = getredirect(f"Flag of {term}")
         altresults = searchresults
     else:
-        result = selectflagpage(place, searchresults)
+        result = selectflagpage(term, searchresults)
         altresults = searchresults
         return [result, altresults]
     if isdisambiguation(result):
