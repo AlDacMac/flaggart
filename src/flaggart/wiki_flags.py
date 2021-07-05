@@ -24,6 +24,7 @@ def getflagpage(place):
         result = altresults[0]
     return [result, altresults]
 
+#TODO Make this shit better, cos it sucks right now
 def selectflagpage(place, results):
     for result in results:
         if "flag" in result.lower():
