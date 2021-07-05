@@ -4,5 +4,5 @@
 sphinx==4.0.2
 sphinx_rtd_theme==0.5.1
 readthedocs-sphinx-search==0.1.0
-wikipedia = ^1.4.0
-wptools = ^0.4.17
+wikipedia==1.4.0
+wptools==0.4.17
