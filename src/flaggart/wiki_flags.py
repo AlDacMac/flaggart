@@ -32,6 +32,18 @@ def getflagpage(term):
     return [result, altresults]
 
 def selectflagpage(place, results):
+    """Given a list of wikipedia page names, selects one with 'flag' or 'coat of arms' in the
+    title and returns it
+
+    :param place: The place who's flag is being searched for
+    :type plae: String
+
+    :param results: A list of search results
+    :type results: [String]
+
+    :return: The selected result
+    :rtype: String
+    """
     for result in results:
         if "flag" in result.lower():
             return result
@@ -40,9 +52,26 @@ def selectflagpage(place, results):
             return result
 
 def filterresults(searchresults):
+    """Given a list of search results, select all those likely to be for flags or coats of arms
+    
+    :param searchresults: A list of Strings represnting individual search results
+    :type searchresults: [String]
+    
+    :returns: A list of those results that contained the substrings 'flag' or 'coat of arms' (case
+        insensitive)
+    :rtype: [String]"""
     return [x for x in searchresults if re.search('flag|coat of arms', x, re.IGNORECASE)]
 
 def getflagurl(pagename):
+    """Given the name of a wikipedia page, returns a representitive image for that page. It can be 
+    safely assumed that, if the wikipedia page corresponds to a flag, the representitive image will
+    be that flag
+    
+    :param pagename: The name of a wikipedia page
+    :type pagename: String
+    
+    :return: The url of the representitive image for the page with name pagename
+    :rtype: String"""
     page = wptools.page(pagename)
     page.get_restbase('/page/summary/')
     return page.data['image'][0]['url']
@@ -50,6 +79,14 @@ def getflagurl(pagename):
 #Checks if a wikipedia page exists
 #   Note: case sensitive
 def pageexists(pagename):
+    """Given a page name, returns True if there is a page on wikipedia with that name.
+
+    :param pagename: The name of a wikipedia page
+    :type pagename: String
+    
+    :return: True if pagename is the name of a wikipedia page, False otherwise
+    :rtype: Boolean
+    """
     url = constructpageurl(pagename)
     if requests.get(url).status_code == 200:
         return True
@@ -58,11 +95,28 @@ def pageexists(pagename):
 
 # Makes a url to a wikipedia page based on plaintext pagename
 def constructpageurl(pagename):
+    """Given a natural-text page name, e.g 'Flag of Thailand', returns a url pointing to a wikipedia
+    page (if one exists) for that page name
+    
+    :param pagename: The name of a wikipedia page
+    :type pagename: String
+    
+    :return: The url of a wikipedia page with the name pagename
+    :rtype: String"""
     pagenamehyphen = pagename.replace(' ', '_')
     url = "https://en.wikipedia.org/wiki/" + pagenamehyphen
     return url
 
 def getredirect(pagename):
+    """Given a wikipedia page name, if the page name refers to a redirect, returns the name of the 
+    page that the redirect points to; Otherwise, returns the input
+
+    :param pagename: The name of a wikipedia page
+    :type pagename: String
+    
+    :return: The absolute name of the page pointed to by pagename
+    :rtype: String
+    """
     pagenamehyphen = pagename.replace(' ', '_')
     query = requests.get(f'https://en.wikipedia.org/w/api.php?action=query&titles={pagenamehyphen}&&redirects&format=json')
     data = json.loads(query.text)
@@ -72,6 +126,15 @@ def getredirect(pagename):
         return pagename
 
 def isdisambiguation(pagename):
+    """Given a wikipedia page name, returns True if that page is a disambiguation page and False otherwise
+    
+    :param pagename: The name of a wikipedia page
+    :type pagename: String
+    
+    :return: True if pagename is the name of a wikipedia page in the 'All disambiguation pages' 
+        category, otherwise False
+    :rtype: Boolean
+    """
     pagenamehyphen = pagename.replace(' ', '_')
     query = requests.get(f'https://en.wikipedia.org/w/api.php?action=query&format=json&titles={pagenamehyphen}&prop=categories')
     data = json.loads(query.text)
@@ -82,6 +145,16 @@ def isdisambiguation(pagename):
     return False
 
 def getdisambiguationlinks(pagename):
+    """Given a wikipedia page name corresponding to a disambiguation page, returns all of the pages
+    it branches to.
+    
+    :param pagename: The name of a wikipedia page
+    :type pagename: String
+    
+    :return: A list of page names, corresponding to every page that the disambiguation suggests as
+        corresponding to the pagename
+    :rtype: [String]
+    """
     links = []
     pagenamehyphen = pagename.replace(' ', '_')
     query = requests.get(f'https://en.wikipedia.org/w/api.php?action=query&format=json&titles={pagenamehyphen}&prop=links')
