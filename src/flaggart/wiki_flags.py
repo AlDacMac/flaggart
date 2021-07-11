@@ -1,5 +1,4 @@
 import wikipedia
-import wptools
 import requests
 import json
 import re
@@ -63,6 +62,7 @@ def filterresults(searchresults):
     :rtype: [String]"""
     return [x for x in searchresults if re.search('flag|coat of arms', x, re.IGNORECASE)]
 
+# Credit goes to DmytroSytro on StackExchange if this works
 def getflagurl(pagename):
     """Given the name of a wikipedia page, returns a representitive image for that page. It can be 
     safely assumed that, if the wikipedia page corresponds to a flag, the representitive image will
@@ -73,9 +73,11 @@ def getflagurl(pagename):
     
     :return: The url of the representitive image for the page with name pagename
     :rtype: String"""
-    page = wptools.page(pagename)
-    page.get_restbase('/page/summary/')
-    return page.data['image'][0]['url']
+    WIKI_REQUEST = 'http://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pilicense=any&piprop=original&titles='
+    response  = requests.get(WIKI_REQUEST+pagename)
+    json_data = json.loads(response.text)
+    img_link = list(json_data['query']['pages'].values())[0]['original']['source']
+    return img_link
 
 #Checks if a wikipedia page exists
 #   Note: case sensitive

@@ -16,7 +16,6 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.6"
 wikipedia = "^1.4.0"
-wptools = "^0.4.17"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
