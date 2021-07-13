@@ -4,22 +4,25 @@ import json
 import re
 
 
-def getflagpage(term):
+def getflagpage(term, kind='Flag'):
     """Returns the wikipedia page corresponding to the flag associated with the search term, along 
     with a list of alternatives. 
 
-    :param term: A place, person, organisation, etc.
+    :param term: A place, person, organisation, etc
     :type term: String
+
+    :param kind: The kind of symbol that is being searched for (e.g flag, seal, or arms), defaults to flag
+    :type kind: String
     
     :return: A list containing the title of the wikipedia page corresponding to the suggested flag,
         and a list of titles for suggested alternative pages
     :rtype: [String, [String]]
     """
     result = None
-    searchresults = filterresults(wikipedia.search(f"Flag of {term}"))
-    if pageexists(f"Flag of {term}"):
-        #TODO Bloody redirects w()
-        result = getredirect(f"Flag of {term}")
+    searchresults = filterresults(wikipedia.search(f"{kind} of {term}"))
+    if pageexists(f"{kind} of {term}"):
+        #TODO Bloody redirects 
+        result = getredirect(f"{kind} of {term}")
         altresults = searchresults
     else:
         result = selectflagpage(term, searchresults)
@@ -27,7 +30,7 @@ def getflagpage(term):
         return [result, altresults]
     if isdisambiguation(result):
         altresults = getdisambiguationlinks(result)
-        result = altresults[0]
+        result = getredirect(altresults[0])
     return [result, altresults]
 
 #TODO Make this shit better, cos it sucks right now
