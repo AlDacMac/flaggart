@@ -45,11 +45,15 @@ def test_getflagpage_ispage_includesearch():
     for page in ['Flag of the United Kingdom', 'Flag of Great Britain', 'List of United Kingdom flags', 'Historical flags of the British Empire and the overseas territories']:
         assert page in result
 
-def test_getflagpage_ispage_coatofarms():
-    result = getflagpage('British coat of arms')
+def test_getflagpage_notpage_coatofarms():
+    result = getflagpage('British', 'coat of arms')
     assert result[0] == "Royal coat of arms of the United Kingdom"
-    for page in ['Royal coat of arms of the United Kingdom', 'Royal arms of England']:
-        assert page in result[1]
+
+def test_getflagpage_seal_us():
+    assert getflagpage("United States", 'seal')[0] == "Great Seal of the United States"
+
+def testg_getflagpage_coatofarms_ny():
+    assert getflagpage("New York", 'Coat of arms')[0] == "Coat of arms of New York"
 
 # selectflagpage
 
