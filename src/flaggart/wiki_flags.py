@@ -21,7 +21,6 @@ def getflagpage(term, kind='Flag'):
     result = None
     searchresults = filterresults(wikipedia.search(f"{kind} of {term}"))
     if pageexists(f"{kind} of {term}"):
-        #TODO Bloody redirects 
         result = getredirect(f"{kind} of {term}")
         altresults = searchresults
     else:
