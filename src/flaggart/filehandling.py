@@ -1,7 +1,6 @@
 from wand.image import Image as WImage
 from PIL import Image as PImage
-from io import StringIO, BytesIO
-import requests
+from io import BytesIO
 
 def pngify(image):
     """Converts image files to png format - intended to deal with flag svgs from wikipedia
