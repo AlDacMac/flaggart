@@ -14,6 +14,7 @@ Welcome to flaggart's documentation!test
    usage/quickstart
    wiki_flags
    filehandling
+   analysis
 
 
 Indices and tables

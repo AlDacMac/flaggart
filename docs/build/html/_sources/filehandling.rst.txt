@@ -1,6 +1,6 @@
-==========
+============
 filehandling
-==========
+============
 
 .. automodule:: filehandling
     :members:
