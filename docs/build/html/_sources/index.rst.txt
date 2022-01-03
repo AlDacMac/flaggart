@@ -13,6 +13,7 @@ Welcome to flaggart's documentation!test
    usage/installation
    usage/quickstart
    wiki_flags
+   filehandling
 
 
 Indices and tables
